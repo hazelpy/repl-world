@@ -25,11 +25,11 @@
         let position = [0, 0];
 
         function update() {
-            CVS.clearRect(0, 0, CVS.width, CVS.height);
+            CTX.clearRect(0, 0, CVS.width, CVS.height);
             
-            CVS.fillRect(position[0], position[1], 4, 4);
+            CTX.fillRect(position[0], position[1], 4, 4);
             for(let i = 0; i < players.length; i++) {
-                CVS.fillRect(players[players.keys[i]][0], players[players.keys[i]][1], 4, 4);
+                CTX.fillRect(players[players.keys[i]][0], players[players.keys[i]][1], 4, 4);
             }
         }
 
