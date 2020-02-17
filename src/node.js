@@ -5,7 +5,7 @@ const io = require("socket.io")(http);
 
 app.use(express.static("src/public"));
 app.get("/", (req, res) => {
-    res.sendFile("/index.html");
+    res.render("/index.jade");
 });
 
 app.get("/home", (req, res) => {
