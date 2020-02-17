@@ -3,21 +3,11 @@ const app = require("express")();
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 
-app.use(express.static("src/public"));
-app.set('view engine', 'pug');
+app.use(express.static("src/views"));
 app.get("/", (req, res) => {
-    res.render("/index.jade");
-});
-
-app.get("/home", (req, res) => {
-    if (req.get("X-Replit-User-Id")) {
-        res.render("/home/index.jade", {
-            user: {
-                id: req.get("X-Replit-User-Id"),
-                name: req.get("X-Replit-User-Name")
-            }
-        });
-    }
+    res.render("/index.pug", {
+        user: false
+    });
 });
 
 http.listen(3000, () => {
