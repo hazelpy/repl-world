@@ -6,8 +6,11 @@
     </head>
     <body>
         <div id="main">
-            <p>Please log in!</p>
-            <script src="https://auth.turbio.repl.co/script.js" authed='location.reload()'></script>
+            if (!user)
+                <p>Please log in!</p>
+                <script src="https://auth.turbio.repl.co/script.js" authed='location.reload()'></script>
+            else 
+                <p> Welcome, #{user.name}! </p>
         </div>
     </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>

@@ -6,7 +6,7 @@ const io = require("socket.io")(http);
 app.use(express.static("/public"));
 app.get("/", (req, res) => {
     if (req.get("X-Replit-User-Id")) {
-        res.render("home/index.pug", {
+        res.render("index.pug", {
             user: {
                 id: req.get("X-Replit-User-Id"),
                 name: req.get("X-Replit-User-Name")
