@@ -26,7 +26,10 @@ http.listen(3000, () => {
 io.on("connection", socket => {
     console.log(`Socket with id of ${socket.id} has connected!`);
 
-    socket.on("join", (id, p) => {
+    socket.on("join", (data) => {
+        let id = data[0];
+        let p = data[1];
+
         socket.broadcast.emit("joined", [id, p]);
         console.log(`Player #${id} joined!`);
         console.log(`Player data: ${id}, ${p}`);

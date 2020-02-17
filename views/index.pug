@@ -14,7 +14,11 @@
     </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
     
+    canvas(id="canvas")
+
     script.
+        let CVS = document.getElementById("canvas");
+        let CTX = CVS.getContext("2d");
         let socket = io();
         let players = {};
         let ID = Math.round(Math.random() * 1000);
@@ -24,18 +28,28 @@
             dict[key] = value;
         }
 
-        socket.emit("join", (ID, position));
-        socket.on("joined", (socket, id, p) => {
+        let data = [ID, position];
+        socket.emit("join", (data));
+        socket.on("joined", (dta) => {
+            let id = dta[0];
+            let p = dta[1];
+
             set(players, id, {"position": p});
+            console.log("Initialized player! Data: " + id + ", " + p);
         });
 
-        socket.on("move", (socket, id, op, np) => {
+        socket.on("move", (id, op, np) => {
             if (players[id] != null) {
                 players[id]["position"] = np;
                 console.log(`Player ${id} moved from ${op} to ${np}.`);
             } else if (players[id] == null) {
                 players[id] = {"position": np};
                 console.log(`Player ${id} moved to ${np}.`);
+            }
+
+            CVS.clearRect(0, 0, CVS.width, CVS.height);
+            for(let i = 0; i < players.length; i++) {
+                CVS.fill()
             }
         });
 
