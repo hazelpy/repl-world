@@ -23,20 +23,20 @@ http.listen(3000, () => {
     console.log("Listening for connections...");
 });
 
-io.on("join", (socket, id, p) => {
-    socket.broadcast.emit("joined", [id, pos]);
-    console.log(`Player #${id} joined!`);
-});
-
 io.on("connection", socket => {
     console.log(`Socket with id of ${socket.id} has connected!`);
+
+    socket.on("join", (id, p) => {
+        socket.broadcast.emit("joined", [id, pos]);
+        console.log(`Player #${id} joined!`);
+    });
+
+    socket.on("move", (id, op, np) => {
+        socket.broadcast.emit("move", [id, op, np]);
+        console.log("Server got movement from player");
+    });
 
     socket.on("disconnect", () => {
         console.log(`Client socket id#${socket.id} has disconnected.`);
     });
-});
-
-io.on("move", (socket, id, op, np) => {
-    socket.broadcast.emit("move", [id, op, np]);
-    console.log("Server got movement from player");
 });
