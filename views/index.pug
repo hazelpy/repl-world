@@ -24,7 +24,7 @@
             dict[key] = value;
         }
 
-        socket.emit("join", [ID, [0, 0]]);
+        socket.emit("join", (ID, position));
         socket.on("joined", (id, p) => {
             set(players, id, {"position": p});
         });
@@ -40,6 +40,6 @@
         });
 
         document.addEventListener("keydown", (e) => {
-            socket.emit("move", [ID, position, [position[0], position[1] + 1]]);
+            socket.emit("move", (ID, position, [position[0], position[1] + 1]));
         });
 </html>
