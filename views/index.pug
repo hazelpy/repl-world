@@ -24,6 +24,15 @@
         let ID = Math.round(Math.random() * 1000);
         let position = [0, 0];
 
+        function update() {
+            CVS.clearRect(0, 0, CVS.width, CVS.height);
+            
+            CVS.fillRect(position[0], position[1], 4, 4);
+            for(let i = 0; i < players.length; i++) {
+                CVS.fillRect(players[players.keys[i]][0], players[players.keys[i]][1], 4, 4);
+            }
+        }
+
         function set(dict, key, value) {
             dict[key] = value;
         }
@@ -47,15 +56,11 @@
                 console.log(`Player ${id} moved to ${np}.`);
             }
 
-            CVS.clearRect(0, 0, CVS.width, CVS.height);
-            
-            CVS.fillRect(position[0], position[1], 4, 4);
-            for(let i = 0; i < players.length; i++) {
-                CVS.fillRect(players[players.keys[i]][0], players[players.keys[i]][1], 4, 4);
-            }
+            update();
         });
 
         document.addEventListener("keydown", (e) => {
             socket.emit("move", (ID, position, [position[0], position[1] + 1]));
+            update();
         });
 </html>
