@@ -3,9 +3,9 @@ const app = require("express")();
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 
-app.use(express.static("src/views"));
+app.use(express.static("src"));
 app.get("/", (req, res) => {
-    res.render("/index.pug", {
+    res.render("index.pug", {
         user: false
     });
 });
