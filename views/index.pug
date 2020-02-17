@@ -25,11 +25,11 @@
         }
 
         socket.emit("join", (ID, position));
-        socket.on("joined", (id, p) => {
+        socket.on("joined", (socket, id, p) => {
             set(players, id, {"position": p});
         });
 
-        socket.on("move", (id, op, np) => {
+        socket.on("move", (socket, id, op, np) => {
             if (players[id] != null) {
                 players[id]["position"] = np;
                 console.log(`Player ${id} moved from ${op} to ${np}.`);
