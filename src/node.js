@@ -8,6 +8,17 @@ app.get("/", (req, res) => {
     res.sendFile("/index.html");
 });
 
+app.get("/home", (req, res) => {
+    if (req.get("X-Replit-User-Id")) {
+        res.render("/home/index.jade", {
+            user: {
+                id: req.get("X-Replit-User-Id"),
+                name: req.get("X-Replit-User-Name")
+            }
+        });
+    }
+});
+
 http.listen(3000, () => {
     console.log("Listening for connections...");
 });
