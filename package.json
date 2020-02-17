@@ -1,0 +1,23 @@
+{
+  "name": "repl-world",
+  "version": "0.0.1",
+  "description": "A Repl.it community platform.",
+  "main": "src/node.js",
+  "scripts": {
+    "test": "node src/node.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hazelpy/repl-world.git"
+  },
+  "author": "hazelpy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hazelpy/repl-world/issues"
+  },
+  "homepage": "https://github.com/hazelpy/repl-world#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  }
+}
