@@ -1,1 +1,0 @@
-document.getElementById("userid").innerText = "#{user.id}"

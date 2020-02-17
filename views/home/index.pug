@@ -12,6 +12,9 @@
         //- Classic HTML below :P
         <p> Hello, #{user.name}! </p>
         <p id="userid"></p>
-        <script src="temp.js"></script>
+        
+        //- Pug script
+        script.
+            document.getElementById("userid").innerText = "User-ID: #{user.id}"
     </body>
 </html>
