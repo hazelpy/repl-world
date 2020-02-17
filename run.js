@@ -27,7 +27,7 @@ io.on("connection", socket => {
     console.log(`Socket with id of ${socket.id} has connected!`);
 
     socket.on("join", (id, p) => {
-        socket.broadcast.emit("joined", [id, pos]);
+        socket.broadcast.emit("joined", [id, p]);
         console.log(`Player #${id} joined!`);
     });
 
