@@ -4,6 +4,7 @@ const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 
 app.use(express.static("src/public"));
+app.set('view engine', 'pug');
 app.get("/", (req, res) => {
     res.render("/index.jade");
 });
