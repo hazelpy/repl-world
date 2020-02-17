@@ -29,6 +29,7 @@ io.on("connection", socket => {
     socket.on("join", (id, p) => {
         socket.broadcast.emit("joined", [id, p]);
         console.log(`Player #${id} joined!`);
+        console.log(`Player data: ${id}, ${p}`);
     });
 
     socket.on("move", (id, op, np) => {
