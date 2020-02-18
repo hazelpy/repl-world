@@ -43,14 +43,6 @@
         });
 
         socket.on("move", (players) => {
-            if (players[id] != null) {
-                players[id]["position"] = np;
-                console.log(`Player ${id} moved from ${op} to ${np}.`);
-            } else if (players[id] == null) {
-                players[id] = {"position": np};
-                console.log(`Player ${id} moved to ${np}.`);
-            }
-
             update(players);
         });
 
