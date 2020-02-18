@@ -27,6 +27,8 @@
             CTX.clearRect(0, 0, CVS.width, CVS.height);
             
             CTX.fillRect(position[0], position[1], 4, 4);
+
+            if (players == null) { return; }
             for(let i = 0; i < players.length; i++) {
                 CTX.fillRect(players[players.keys[i]][0], players[players.keys[i]][1], 4, 4);
             }
@@ -48,6 +50,6 @@
 
         document.addEventListener("keydown", (e) => {
             socket.emit("move", (ID, position, [position[0], position[1] + 1]));
-            update();
+            update(null);
         });
 </html>
