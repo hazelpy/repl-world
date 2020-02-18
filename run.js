@@ -42,7 +42,7 @@ io.on("connection", socket => {
 
     socket.on("move", (id, op, np) => {
         players[socket.id]["position"] = np;
-        socket.broadcast.emit("move", players);
+        io.sockets.emit("move", players);
         console.log("Server got movement from player");
     });
 
