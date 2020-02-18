@@ -30,9 +30,9 @@
 
             if (players == null) { return; }
 
-            console.log(players.keys);
+            let keys = Object.keys(players);
             for(let i = 0; i < players.length; i++) {
-                CTX.fillRect(players[players.keys[i]][0], players[players.keys[i]][1], 4, 4);
+                CTX.fillRect(players[keys[i]][0], players[keys[i]][1], 4, 4);
             }
         }
 
