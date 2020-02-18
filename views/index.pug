@@ -32,6 +32,7 @@
 
             let keys = Object.keys(players);
             for(let i = 0; i < players.length; i++) {
+                if (keys[i] == null) { continue; } 
                 CTX.fillRect(players[keys[i]][0], players[keys[i]][1], 4, 4);
             }
         }
