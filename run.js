@@ -2,6 +2,10 @@ const express = require("express");
 const app = require("express")();
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
+let players = {};
+function set(dict, key, value) {
+    dict[key] = value;
+}
 
 app.use(express.static("/public"));
 app.get("/", (req, res) => {
@@ -29,18 +33,21 @@ io.on("connection", socket => {
     socket.on("join", (data) => {
         let id = data[0];
         let p = data[1];
-
-        socket.broadcast.emit("joined", [id, p]);
+        
+        set(players, socket.id, p);
+        socket.broadcast.emit("joined", players);
         console.log(`Player #${id} joined!`);
         console.log(`Player data: ${id}, ${p}`);
     });
 
     socket.on("move", (id, op, np) => {
-        socket.broadcast.emit("move", [id, op, np]);
+        players[socket.id]["position"] = np;
+        socket.broadcast.emit("move", players);
         console.log("Server got movement from player");
     });
 
     socket.on("disconnect", () => {
-        console.log(`Client socket id#${socket.id} has disconnected.`);
+        set(players, socket.id, null);
+        console.log(`Client socket id of ${socket.id} has disconnected.`);
     });
 });

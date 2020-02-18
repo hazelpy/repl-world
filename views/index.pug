@@ -20,11 +20,10 @@
         let CVS = document.getElementById("canvas");
         let CTX = CVS.getContext("2d");
         let socket = io();
-        let players = {};
         let ID = Math.round(Math.random() * 1000);
-        let position = [0, 0];
+        let position = [Math.round(Math.random() * 100), 0];
 
-        function update() {
+        function update(players) {
             CTX.clearRect(0, 0, CVS.width, CVS.height);
             
             CTX.fillRect(position[0], position[1], 4, 4);
@@ -39,15 +38,11 @@
 
         let data = [ID, position];
         socket.emit("join", (data));
-        socket.on("joined", (dta) => {
-            let id = dta[0];
-            let p = dta[1];
-
-            set(players, id, {"position": p});
-            console.log("Initialized player! Data: " + id + ", " + p);
+        socket.on("joined", (players) => {
+            update(players);
         });
 
-        socket.on("move", (id, op, np) => {
+        socket.on("move", (players) => {
             if (players[id] != null) {
                 players[id]["position"] = np;
                 console.log(`Player ${id} moved from ${op} to ${np}.`);
@@ -56,7 +51,7 @@
                 console.log(`Player ${id} moved to ${np}.`);
             }
 
-            update();
+            update(players);
         });
 
         document.addEventListener("keydown", (e) => {
